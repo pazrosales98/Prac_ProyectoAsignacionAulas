@@ -1,0 +1,597 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="UnicahModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Aulas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numero" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="Ubicacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClaseDia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FkClasePeriodoId" Type="int" Nullable="false" />
+          <Property Name="FkDiaId" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClasePeriodo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoraInicio" Type="time" Precision="4" Nullable="false" />
+          <Property Name="HoraFin" Type="time" Precision="4" Nullable="false" />
+          <Property Name="Dias" Type="nvarchar" MaxLength="170" />
+          <Property Name="FKMaestroId" Type="smallint" Nullable="false" />
+          <Property Name="FKPeriodoId" Type="int" Nullable="false" />
+          <Property Name="FKClaseId" Type="int" Nullable="false" />
+          <Property Name="FkAulaId" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clases">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Dias">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Dia" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Maestros">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Identidad" Type="nvarchar" MaxLength="20" />
+          <Property Name="Estado" Type="char" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Periodos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaInicio" Type="date" Nullable="false" />
+          <Property Name="FechaFin" Type="date" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Usuario" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Contrasenia" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="EsAdmin" Type="bit" Nullable="false" />
+          <Property Name="Estado" Type="char" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ClaseDia_ClasePeriodo">
+          <End Role="ClasePeriodo" Type="Self.ClasePeriodo" Multiplicity="1" />
+          <End Role="ClaseDia" Type="Self.ClaseDia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClasePeriodo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClaseDia">
+              <PropertyRef Name="FkClasePeriodoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClaseDia_Dias">
+          <End Role="Dias" Type="Self.Dias" Multiplicity="1" />
+          <End Role="ClaseDia" Type="Self.ClaseDia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dias">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClaseDia">
+              <PropertyRef Name="FkDiaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClasePeriodo_Aulas">
+          <End Role="Aulas" Type="Self.Aulas" Multiplicity="1" />
+          <End Role="ClasePeriodo" Type="Self.ClasePeriodo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aulas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClasePeriodo">
+              <PropertyRef Name="FkAulaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClasePeriodo_Clases">
+          <End Role="Clases" Type="Self.Clases" Multiplicity="1" />
+          <End Role="ClasePeriodo" Type="Self.ClasePeriodo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clases">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClasePeriodo">
+              <PropertyRef Name="FKClaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClasePeriodo_Maestros">
+          <End Role="Maestros" Type="Self.Maestros" Multiplicity="1" />
+          <End Role="ClasePeriodo" Type="Self.ClasePeriodo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maestros">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClasePeriodo">
+              <PropertyRef Name="FKMaestroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClasePeriodo_Periodos">
+          <End Role="Periodos" Type="Self.Periodos" Multiplicity="1" />
+          <End Role="ClasePeriodo" Type="Self.ClasePeriodo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClasePeriodo">
+              <PropertyRef Name="FKPeriodoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="UnicahModelStoreContainer">
+          <EntitySet Name="Aulas" EntityType="Self.Aulas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClaseDia" EntityType="Self.ClaseDia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClasePeriodo" EntityType="Self.ClasePeriodo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clases" EntityType="Self.Clases" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dias" EntityType="Self.Dias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Maestros" EntityType="Self.Maestros" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Periodos" EntityType="Self.Periodos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ClaseDia_ClasePeriodo" Association="Self.FK_ClaseDia_ClasePeriodo">
+            <End Role="ClasePeriodo" EntitySet="ClasePeriodo" />
+            <End Role="ClaseDia" EntitySet="ClaseDia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClaseDia_Dias" Association="Self.FK_ClaseDia_Dias">
+            <End Role="Dias" EntitySet="Dias" />
+            <End Role="ClaseDia" EntitySet="ClaseDia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClasePeriodo_Aulas" Association="Self.FK_ClasePeriodo_Aulas">
+            <End Role="Aulas" EntitySet="Aulas" />
+            <End Role="ClasePeriodo" EntitySet="ClasePeriodo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClasePeriodo_Clases" Association="Self.FK_ClasePeriodo_Clases">
+            <End Role="Clases" EntitySet="Clases" />
+            <End Role="ClasePeriodo" EntitySet="ClasePeriodo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClasePeriodo_Maestros" Association="Self.FK_ClasePeriodo_Maestros">
+            <End Role="Maestros" EntitySet="Maestros" />
+            <End Role="ClasePeriodo" EntitySet="ClasePeriodo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClasePeriodo_Periodos" Association="Self.FK_ClasePeriodo_Periodos">
+            <End Role="Periodos" EntitySet="Periodos" />
+            <End Role="ClasePeriodo" EntitySet="ClasePeriodo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UnicahModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Aulas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numero" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Ubicacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ClasePeriodo" Relationship="Self.FK_ClasePeriodo_Aulas" FromRole="Aulas" ToRole="ClasePeriodo" />
+        </EntityType>
+        <EntityType Name="ClaseDia">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FkClasePeriodoId" Type="Int32" Nullable="false" />
+          <Property Name="FkDiaId" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="ClasePeriodo" Relationship="Self.FK_ClaseDia_ClasePeriodo" FromRole="ClaseDia" ToRole="ClasePeriodo" />
+          <NavigationProperty Name="Dias" Relationship="Self.FK_ClaseDia_Dias" FromRole="ClaseDia" ToRole="Dias" />
+        </EntityType>
+        <EntityType Name="ClasePeriodo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoraInicio" Type="Time" Nullable="false" Precision="4" />
+          <Property Name="HoraFin" Type="Time" Nullable="false" Precision="4" />
+          <Property Name="FKMaestroId" Type="Int16" Nullable="false" />
+          <Property Name="FKPeriodoId" Type="Int32" Nullable="false" />
+          <Property Name="FKClaseId" Type="Int32" Nullable="false" />
+          <Property Name="FkAulaId" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Aulas" Relationship="Self.FK_ClasePeriodo_Aulas" FromRole="ClasePeriodo" ToRole="Aulas" />
+          <NavigationProperty Name="ClaseDia" Relationship="Self.FK_ClaseDia_ClasePeriodo" FromRole="ClasePeriodo" ToRole="ClaseDia" />
+          <NavigationProperty Name="Clases" Relationship="Self.FK_ClasePeriodo_Clases" FromRole="ClasePeriodo" ToRole="Clases" />
+          <NavigationProperty Name="Maestros" Relationship="Self.FK_ClasePeriodo_Maestros" FromRole="ClasePeriodo" ToRole="Maestros" />
+          <NavigationProperty Name="Periodos" Relationship="Self.FK_ClasePeriodo_Periodos" FromRole="ClasePeriodo" ToRole="Periodos" />
+          <Property Name="Dias" Type="String" MaxLength="170" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Clases">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ClasePeriodo" Relationship="Self.FK_ClasePeriodo_Clases" FromRole="Clases" ToRole="ClasePeriodo" />
+        </EntityType>
+        <EntityType Name="Dias">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Dia" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ClaseDia" Relationship="Self.FK_ClaseDia_Dias" FromRole="Dias" ToRole="ClaseDia" />
+        </EntityType>
+        <EntityType Name="Maestros">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Identidad" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Estado" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ClasePeriodo" Relationship="Self.FK_ClasePeriodo_Maestros" FromRole="Maestros" ToRole="ClasePeriodo" />
+        </EntityType>
+        <EntityType Name="Periodos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaInicio" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="FechaFin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ClasePeriodo" Relationship="Self.FK_ClasePeriodo_Periodos" FromRole="Periodos" ToRole="ClasePeriodo" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Usuario" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Contrasenia" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EsAdmin" Type="Boolean" Nullable="false" />
+          <Property Name="Estado" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ClasePeriodo_Aulas">
+          <End Role="Aulas" Type="Self.Aulas" Multiplicity="1" />
+          <End Role="ClasePeriodo" Type="Self.ClasePeriodo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Aulas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClasePeriodo">
+              <PropertyRef Name="FkAulaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClaseDia_ClasePeriodo">
+          <End Role="ClasePeriodo" Type="Self.ClasePeriodo" Multiplicity="1" />
+          <End Role="ClaseDia" Type="Self.ClaseDia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClasePeriodo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClaseDia">
+              <PropertyRef Name="FkClasePeriodoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClaseDia_Dias">
+          <End Role="Dias" Type="Self.Dias" Multiplicity="1" />
+          <End Role="ClaseDia" Type="Self.ClaseDia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dias">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClaseDia">
+              <PropertyRef Name="FkDiaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClasePeriodo_Clases">
+          <End Role="Clases" Type="Self.Clases" Multiplicity="1" />
+          <End Role="ClasePeriodo" Type="Self.ClasePeriodo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clases">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClasePeriodo">
+              <PropertyRef Name="FKClaseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClasePeriodo_Maestros">
+          <End Role="Maestros" Type="Self.Maestros" Multiplicity="1" />
+          <End Role="ClasePeriodo" Type="Self.ClasePeriodo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Maestros">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClasePeriodo">
+              <PropertyRef Name="FKMaestroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClasePeriodo_Periodos">
+          <End Role="Periodos" Type="Self.Periodos" Multiplicity="1" />
+          <End Role="ClasePeriodo" Type="Self.ClasePeriodo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodos">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClasePeriodo">
+              <PropertyRef Name="FKPeriodoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UnicahEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Aulas" EntityType="Self.Aulas" />
+          <EntitySet Name="ClaseDia" EntityType="Self.ClaseDia" />
+          <EntitySet Name="ClasePeriodo" EntityType="Self.ClasePeriodo" />
+          <EntitySet Name="Clases" EntityType="Self.Clases" />
+          <EntitySet Name="Dias" EntityType="Self.Dias" />
+          <EntitySet Name="Maestros" EntityType="Self.Maestros" />
+          <EntitySet Name="Periodos" EntityType="Self.Periodos" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="FK_ClasePeriodo_Aulas" Association="Self.FK_ClasePeriodo_Aulas">
+            <End Role="Aulas" EntitySet="Aulas" />
+            <End Role="ClasePeriodo" EntitySet="ClasePeriodo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClaseDia_ClasePeriodo" Association="Self.FK_ClaseDia_ClasePeriodo">
+            <End Role="ClasePeriodo" EntitySet="ClasePeriodo" />
+            <End Role="ClaseDia" EntitySet="ClaseDia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClaseDia_Dias" Association="Self.FK_ClaseDia_Dias">
+            <End Role="Dias" EntitySet="Dias" />
+            <End Role="ClaseDia" EntitySet="ClaseDia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClasePeriodo_Clases" Association="Self.FK_ClasePeriodo_Clases">
+            <End Role="Clases" EntitySet="Clases" />
+            <End Role="ClasePeriodo" EntitySet="ClasePeriodo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClasePeriodo_Maestros" Association="Self.FK_ClasePeriodo_Maestros">
+            <End Role="Maestros" EntitySet="Maestros" />
+            <End Role="ClasePeriodo" EntitySet="ClasePeriodo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClasePeriodo_Periodos" Association="Self.FK_ClasePeriodo_Periodos">
+            <End Role="Periodos" EntitySet="Periodos" />
+            <End Role="ClasePeriodo" EntitySet="ClasePeriodo" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(UnicahModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(UnicahModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UnicahModelStoreContainer" CdmEntityContainer="UnicahEntities">
+          <EntitySetMapping Name="Aulas">
+            <EntityTypeMapping TypeName="UnicahModel.Aulas">
+              <MappingFragment StoreEntitySet="Aulas">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClaseDia">
+            <EntityTypeMapping TypeName="UnicahModel.ClaseDia">
+              <MappingFragment StoreEntitySet="ClaseDia">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FkClasePeriodoId" ColumnName="FkClasePeriodoId" />
+                <ScalarProperty Name="FkDiaId" ColumnName="FkDiaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClasePeriodo">
+            <EntityTypeMapping TypeName="UnicahModel.ClasePeriodo">
+              <MappingFragment StoreEntitySet="ClasePeriodo">
+                <ScalarProperty Name="Dias" ColumnName="Dias" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="HoraInicio" ColumnName="HoraInicio" />
+                <ScalarProperty Name="HoraFin" ColumnName="HoraFin" />
+                <ScalarProperty Name="FKMaestroId" ColumnName="FKMaestroId" />
+                <ScalarProperty Name="FKPeriodoId" ColumnName="FKPeriodoId" />
+                <ScalarProperty Name="FKClaseId" ColumnName="FKClaseId" />
+                <ScalarProperty Name="FkAulaId" ColumnName="FkAulaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clases">
+            <EntityTypeMapping TypeName="UnicahModel.Clases">
+              <MappingFragment StoreEntitySet="Clases">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dias">
+            <EntityTypeMapping TypeName="UnicahModel.Dias">
+              <MappingFragment StoreEntitySet="Dias">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Dia" ColumnName="Dia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Maestros">
+            <EntityTypeMapping TypeName="UnicahModel.Maestros">
+              <MappingFragment StoreEntitySet="Maestros">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Identidad" ColumnName="Identidad" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Periodos">
+            <EntityTypeMapping TypeName="UnicahModel.Periodos">
+              <MappingFragment StoreEntitySet="Periodos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+                <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="UnicahModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Contrasenia" ColumnName="Contrasenia" />
+                <ScalarProperty Name="EsAdmin" ColumnName="EsAdmin" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="UnicahModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="UnicahModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="UnicahModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="UnicahModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UnicahModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="UnicahModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UnicahModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="UnicahModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="UnicahModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

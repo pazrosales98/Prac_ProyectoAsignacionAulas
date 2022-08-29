@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{686FE98E-3729-49D1-862F-7B4F96B82943}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>UNICAH</RootNamespace>
+    <AssemblyName>UNICAH</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Dev|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Dev\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms">
+      <HintPath>C:\PROGRAM FILES (X86)\MICROSOFT VISUAL STUDIO\2019\COMMUNITY\COMMON7\IDE\COMMONEXTENSIONS\MICROSOFT\SSAS\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Clases\Hash256.cs" />
+    <Compile Include="Clases\Mensajes.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\frmAsignarClases.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\frmAsignarClases.Designer.cs">
+      <DependentUpon>frmAsignarClases.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\frmBuscarAula.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\frmBuscarAula.Designer.cs">
+      <DependentUpon>frmBuscarAula.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\frmBuscarClase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\frmBuscarClase.Designer.cs">
+      <DependentUpon>frmBuscarClase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\frmBuscarMaestro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\frmBuscarMaestro.Designer.cs">
+      <DependentUpon>frmBuscarMaestro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\frmBuscarPeriodo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\frmBuscarPeriodo.Designer.cs">
+      <DependentUpon>frmBuscarPeriodo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\frmMiCuenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\frmMiCuenta.Designer.cs">
+      <DependentUpon>frmMiCuenta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Mantenimientos\frmPeriodos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Mantenimientos\frmPeriodos.Designer.cs">
+      <DependentUpon>frmPeriodos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Mantenimientos\frmAulas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Mantenimientos\frmAulas.Designer.cs">
+      <DependentUpon>frmAulas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Mantenimientos\frmClases.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Mantenimientos\frmClases.Designer.cs">
+      <DependentUpon>frmClases.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Mantenimientos\frmMaestros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Mantenimientos\frmMaestros.Designer.cs">
+      <DependentUpon>frmMaestros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Mantenimientos\frmUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Mantenimientos\frmUsuarios.Designer.cs">
+      <DependentUpon>frmUsuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Reportes\DsReportes.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DsReportes.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Reportes\frmReporteClaseAula.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Reportes\frmReporteClaseAula.Designer.cs">
+      <DependentUpon>frmReporteClaseAula.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Reportes\frmReporteClasePeriodo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Reportes\frmReporteClasePeriodo.Designer.cs">
+      <DependentUpon>frmReporteClasePeriodo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Reportes\frmReporteClasesMaestros.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Reportes\frmReporteClasesMaestros.Designer.cs">
+      <DependentUpon>frmReporteClasesMaestros.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\Aulas.cs">
+      <DependentUpon>UNICAH_MODELO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\ClaseDia.cs">
+      <DependentUpon>UNICAH_MODELO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\ClasePeriodo.cs">
+      <DependentUpon>UNICAH_MODELO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\Clases.cs">
+      <DependentUpon>UNICAH_MODELO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\Dias.cs">
+      <DependentUpon>UNICAH_MODELO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\Maestros.cs">
+      <DependentUpon>UNICAH_MODELO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\Periodos.cs">
+      <DependentUpon>UNICAH_MODELO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>UNICAH_MODELO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\sp_helpdiagrams_Result.cs">
+      <DependentUpon>UNICAH_MODELO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\UNICAH_MODELO.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UNICAH_MODELO.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\UNICAH_MODELO.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UNICAH_MODELO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\UNICAH_MODELO.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UNICAH_MODELO.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Modelo\Usuarios.cs">
+      <DependentUpon>UNICAH_MODELO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilidades\Logs.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\frmAsignarClases.resx">
+      <DependentUpon>frmAsignarClases.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\frmBuscarAula.resx">
+      <DependentUpon>frmBuscarAula.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\frmBuscarClase.resx">
+      <DependentUpon>frmBuscarClase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\frmBuscarMaestro.resx">
+      <DependentUpon>frmBuscarMaestro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\frmBuscarPeriodo.resx">
+      <DependentUpon>frmBuscarPeriodo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\frmMiCuenta.resx">
+      <DependentUpon>frmMiCuenta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Mantenimientos\frmPeriodos.resx">
+      <DependentUpon>frmPeriodos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Mantenimientos\frmAulas.resx">
+      <DependentUpon>frmAulas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Mantenimientos\frmClases.resx">
+      <DependentUpon>frmClases.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Mantenimientos\frmMaestros.resx">
+      <DependentUpon>frmMaestros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Mantenimientos\frmUsuarios.resx">
+      <DependentUpon>frmUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Reportes\frmReporteClaseAula.resx">
+      <DependentUpon>frmReporteClaseAula.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Reportes\frmReporteClasePeriodo.resx">
+      <DependentUpon>frmReporteClasePeriodo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Reportes\frmReporteClasesMaestros.resx">
+      <DependentUpon>frmReporteClasesMaestros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Reportes\rptClasesAula.rdlc" />
+    <EmbeddedResource Include="Formularios\Reportes\rptClasesMaestro.rdlc" />
+    <EmbeddedResource Include="Formularios\Reportes\rptClasesPeriodo.rdlc" />
+    <EmbeddedResource Include="frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EntityDeploy Include="Modelo\UNICAH_MODELO.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UNICAH_MODELO.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Formularios\Reportes\DsReportes.xsc">
+      <DependentUpon>DsReportes.xsd</DependentUpon>
+    </None>
+    <None Include="Formularios\Reportes\DsReportes.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DsReportes.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Formularios\Reportes\DsReportes.xss">
+      <DependentUpon>DsReportes.xsd</DependentUpon>
+    </None>
+    <None Include="Modelo\UNICAH_MODELO.edmx.diagram">
+      <DependentUpon>UNICAH_MODELO.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Modelo\UNICAH_MODELO.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>UNICAH_MODELO.Context.cs</LastGenOutput>
+      <DependentUpon>UNICAH_MODELO.edmx</DependentUpon>
+    </Content>
+    <Content Include="Modelo\UNICAH_MODELO.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UNICAH_MODELO.edmx</DependentUpon>
+      <LastGenOutput>UNICAH_MODELO.cs</LastGenOutput>
+    </Content>
+    <None Include="Resources\chart-box.png" />
+    <None Include="Resources\chart-box-outline.png" />
+    <None Include="Resources\book-check.png" />
+    <None Include="Resources\tools.png" />
+    <None Include="Resources\logout.png" />
+    <None Include="Resources\restore.png" />
+    <None Include="Resources\magnify.png" />
+    <None Include="Resources\delete.png" />
+    <None Include="Resources\plus-box.png" />
+    <None Include="Resources\plus.png" />
+    <None Include="Resources\content-save%281%29.png" />
+    <None Include="Resources\content-save.png" />
+    <None Include="Resources\logo-unicah-svg-blanco-mini.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

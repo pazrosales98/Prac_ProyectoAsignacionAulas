@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2840ccac91ca413f996137e8396aab42" Name="Diagram1">
+        <EntityTypeShape EntityType="UnicahModel.Aulas" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnicahModel.ClaseDia" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnicahModel.ClasePeriodo" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnicahModel.Clases" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnicahModel.Dias" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnicahModel.Maestros" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnicahModel.Periodos" Width="1.5" PointX="0.75" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnicahModel.Usuarios" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="UnicahModel.FK_ClasePeriodo_Aulas" ManuallyRouted="false" />
+        <AssociationConnector Association="UnicahModel.FK_ClaseDia_ClasePeriodo" ManuallyRouted="false" />
+        <AssociationConnector Association="UnicahModel.FK_ClaseDia_Dias" ManuallyRouted="false" />
+        <AssociationConnector Association="UnicahModel.FK_ClasePeriodo_Clases" ManuallyRouted="false" />
+        <AssociationConnector Association="UnicahModel.FK_ClasePeriodo_Maestros" ManuallyRouted="false" />
+        <AssociationConnector Association="UnicahModel.FK_ClasePeriodo_Periodos" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
